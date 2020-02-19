@@ -1,6 +1,5 @@
-package org.blitdz.study;
+package org.blitdz.study.automata;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

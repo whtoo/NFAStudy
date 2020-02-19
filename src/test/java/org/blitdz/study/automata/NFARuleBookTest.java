@@ -1,9 +1,8 @@
-package org.blitdz.study;
+package org.blitdz.study.automata;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import junit.extensions.TestDecorator;
 
 import java.util.ArrayList;
 import java.util.HashSet;

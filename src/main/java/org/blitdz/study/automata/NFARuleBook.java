@@ -1,4 +1,4 @@
-package org.blitdz.study;
+package org.blitdz.study.automata;
 
 import java.util.*;
 import java.util.stream.Collectors;

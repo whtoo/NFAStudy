@@ -1,4 +1,4 @@
-package org.blitdz.study;
+package org.blitdz.study.automata;
 
 public class FARule {
     private int state;

@@ -1,6 +1,4 @@
-package org.blitdz.study;
-
-import java.util.ArrayList;
+package org.blitdz.study.automata;
 
 public class DFA {
     private int currentState;

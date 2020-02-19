@@ -1,4 +1,4 @@
-package org.blitdz.study;
+package org.blitdz.study.automata;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
