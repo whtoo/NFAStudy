@@ -65,7 +65,7 @@ public class NFATest extends TestCase {
         assertFalse(nfa.accpeting());
         acceptStates.add(1);
         currentStates.add(3);
-        nfa = new NFA(currentStates,acceptStates,null);
+        nfa = new NFA(currentStates, acceptStates, nfaRuleBook);
         assertTrue(nfa.accpeting());
     }
 
@@ -82,5 +82,35 @@ public class NFATest extends TestCase {
     public void testReadSeq() {
         assertFalse(nfa.accpeting());
         assertTrue(nfa.readCharSeq("babbb").accpeting());
+    }
+
+    public void testAcceptWithStr() {
+
+        ArrayList<FARule> rules = new ArrayList<>(3);
+
+        rules.add(new FARule(1, ' ', 2));
+        rules.add(new FARule(1, ' ', 4));
+        rules.add(new FARule(3, 'a', 2));
+        rules.add(new FARule(2, 'a', 3));
+        rules.add(new FARule(4, 'a', 5));
+        rules.add(new FARule(5, 'a', 6));
+        rules.add(new FARule(6, 'a', 4));
+
+        NFARuleBook nfaRuleBook = new NFARuleBook(rules);
+        Set<Integer> currentStates = new HashSet<>(2);
+        currentStates.add(1);
+        Set<Integer> acceptStates = new HashSet<>(2);
+        acceptStates.add(4);
+        acceptStates.add(2);
+        NFA nfa = new NFA(currentStates, acceptStates, nfaRuleBook);
+        assertTrue(nfa.isAcceptWith("aa"));
+        nfa = new NFA(currentStates, acceptStates, nfaRuleBook);
+        assertTrue(nfa.isAcceptWith("aaa"));
+        nfa = new NFA(currentStates, acceptStates, nfaRuleBook);
+        assertTrue(nfa.isAcceptWith("aaaa"));
+        nfa = new NFA(currentStates, acceptStates, nfaRuleBook);
+        assertFalse(nfa.isAcceptWith("aaaaa"));
+        nfa = new NFA(currentStates, acceptStates, nfaRuleBook);
+        assertTrue(nfa.isAcceptWith("aaaaaa"));
     }
 }

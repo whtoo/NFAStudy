@@ -65,11 +65,33 @@ public class NFARuleBookTest extends TestCase {
         assertTrue(ns1.size() == 2);
         assertTrue(ns1.contains(1));
         assertTrue(ns1.contains(3));
-        ns1 = nfaRuleBook.nextStates(s2,'b');
+        ns1 = nfaRuleBook.nextStates(s2, 'b');
         assertTrue(ns1.size() == 3);
         assertTrue(ns1.contains(1));
         assertTrue(ns1.contains(2));
         assertTrue(ns1.contains(4));
+    }
+
+    public void testFollowFreeMoves() {
+        ArrayList<FARule> rules = new ArrayList<>(3);
+
+        rules.add(new FARule(1, ' ', 2));
+        rules.add(new FARule(1, ' ', 4));
+        rules.add(new FARule(3, 'a', 2));
+        rules.add(new FARule(2, 'a', 3));
+        rules.add(new FARule(4, 'a', 5));
+        rules.add(new FARule(5, 'a', 6));
+        rules.add(new FARule(6, 'a', 4));
+
+        NFARuleBook nfaRuleBook = new NFARuleBook(rules);
+        Set<Integer> ns1 = new HashSet<>(2);
+        ns1.add(2);
+        ns1.add(4);
+        Set<Integer> s1 = new HashSet<>(1);
+        s1.add(1);
+        assertEquals(nfaRuleBook.nextStates(s1, ' '), ns1);
+        ns1.add(1);
+        assertEquals(nfaRuleBook.followFreeMoves(s1), ns1);
     }
 
 }

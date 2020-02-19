@@ -7,7 +7,7 @@ public class NFA {
     private Set<Integer> currentStates;
     private Set<Integer> acceptStates;
     private NFARuleBook ruleBook;
-    public NFA(Set<Integer> currentStates, Set<Integer> accpetStates,NFARuleBook ruleBook){
+    public NFA(Set<Integer> currentStates, Set<Integer> accpetStates, NFARuleBook ruleBook) {
         this.currentStates = new HashSet<>(currentStates);
         this.acceptStates = new HashSet<>(accpetStates);
         this.ruleBook = ruleBook;
@@ -15,8 +15,8 @@ public class NFA {
 
     public boolean accpeting() {
         boolean intersection = false;
-        if((currentStates.size() != 0 && acceptStates.size() != 0) || (currentStates.size() == 0 && acceptStates.size() == 0) ){
-            Set tmpStates = new HashSet(currentStates);
+        Set tmpStates = new HashSet(getCurrentStates());
+        if ((tmpStates.size() != 0 && acceptStates.size() != 0) || (tmpStates.size() == 0 && acceptStates.size() == 0)) {
             tmpStates.retainAll(acceptStates);
             intersection = tmpStates.size() > 0;
         }
@@ -25,7 +25,7 @@ public class NFA {
     }
 
     protected NFA readCharacter(char c) {
-        this.currentStates = this.ruleBook.nextStates(currentStates,c);
+        this.currentStates = this.ruleBook.nextStates(this.getCurrentStates(), c);
         return this;
     }
 
@@ -35,5 +35,14 @@ public class NFA {
             readCharacter(c);
         }
         return this;
+    }
+
+    public Set<Integer> getCurrentStates() {
+        return ruleBook.followFreeMoves(this.currentStates);
+    }
+
+    public boolean isAcceptWith(String seq) {
+        readCharSeq(seq);
+        return accpeting();
     }
 }

@@ -21,15 +21,26 @@ public class NFARuleBook  {
         return new HashSet<>(nextStates);
     }
 
-    public ArrayList<Integer> followRulesFor(Integer state, char character){
-        Stream<Integer> ret = rulesFor(state,character).stream().map(FARule::follow);
+    public ArrayList<Integer> followRulesFor(Integer state, char character) {
+        Stream<Integer> ret = rulesFor(state, character).stream().map(FARule::follow);
         return new ArrayList<Integer>(ret.collect(Collectors.toList()));
     }
 
     public ArrayList<FARule> rulesFor(Integer state, char character) {
-        Stream<FARule> s =  rules.stream().filter(rule -> rule.appliesTo(state,character));
+        Stream<FARule> s = rules.stream().filter(rule -> rule.appliesTo(state, character));
         return new ArrayList<>(s.collect(Collectors.toList()));
     }
 
+    public Set<Integer> followFreeMoves(Set<Integer> states) {
+        Set<Integer> moreStates = nextStates(states, ' ');
 
+        if (states.containsAll(moreStates)) {
+            return states;
+        } else {
+            Set<Integer> mergeStates = new HashSet(2);
+            mergeStates.addAll(states);
+            mergeStates.addAll(moreStates);
+            return followFreeMoves(mergeStates);
+        }
+    }
 }
