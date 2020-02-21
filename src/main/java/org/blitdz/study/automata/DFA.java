@@ -34,8 +34,7 @@ public class DFA {
     }
 
     public void readCharSeq(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+        for (var c : s.toCharArray()) {
             readCharacter(c);
         }
     }
