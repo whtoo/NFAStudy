@@ -70,4 +70,8 @@ public class DFATest extends TestCase {
         dfa.readCharSeq(seq);
         assertTrue(dfa.accepting());
     }
+
+    public void testUpdateAcceptStates() {
+
+    }
 }

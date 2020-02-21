@@ -1,5 +1,6 @@
 package org.blitdz.study.automata;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,7 @@ public class NFA {
     private Set<Integer> currentStates;
     private Set<Integer> acceptStates;
     private NFARuleBook ruleBook;
+
     public NFA(Set<Integer> currentStates, Set<Integer> accpetStates, NFARuleBook ruleBook) {
         this.currentStates = new HashSet<>(currentStates);
         this.acceptStates = new HashSet<>(accpetStates);
@@ -38,6 +40,12 @@ public class NFA {
     }
 
     public Set<Integer> getCurrentStates() {
+        currentStates.stream().max(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return 0;
+            }
+        });
         return ruleBook.followFreeMoves(this.currentStates);
     }
 
