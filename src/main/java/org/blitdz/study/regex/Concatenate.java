@@ -1,6 +1,7 @@
 package org.blitdz.study.regex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +21,7 @@ public class Concatenate implements IPrecedence {
 
     @Override
     public String toString() {
-        List<IPrecedence> members = new ArrayList();
-        members.add(first);
-        members.add(second);
+        List<IPrecedence> members = Arrays.asList(first, second);
         return members.stream().map(val -> val.bracket(precedence())).collect(Collectors.joining()).toString();
     }
 }

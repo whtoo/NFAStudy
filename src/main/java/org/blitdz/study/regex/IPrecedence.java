@@ -6,7 +6,7 @@ public interface IPrecedence {
     }
 
     default public String bracket(Integer outerPrecedence) {
-        StringBuilder builder = new StringBuilder();
+        var builder = new StringBuilder();
         if (this.precedence() < outerPrecedence) {
             builder.append("(");
             builder.append(this.toString());
