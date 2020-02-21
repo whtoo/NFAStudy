@@ -32,20 +32,13 @@ public class NFA {
     }
 
     public NFA readCharSeq(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+        for (var c : s.toCharArray()) {
             readCharacter(c);
         }
         return this;
     }
 
     public Set<Integer> getCurrentStates() {
-        currentStates.stream().max(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return 0;
-            }
-        });
         return ruleBook.followFreeMoves(this.currentStates);
     }
 
