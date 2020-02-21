@@ -5,8 +5,6 @@ public interface IPrecedence {
         return 4;
     }
 
-    ;
-
     default public String bracket(Integer outerPrecedence) {
         StringBuilder builder = new StringBuilder();
         if (this.precedence() < outerPrecedence) {
